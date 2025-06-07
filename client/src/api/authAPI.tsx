@@ -14,6 +14,12 @@ const login = async (userInfo: UserLogin) => {
       throw new Error('Login failed');
     }
 
+    // Check Content-Length before parsing
+    const contentLength = response.headers.get("Content-Length");
+    if (!contentLength || parseInt(contentLength) === 0) {
+      throw new Error('Empty response body');
+    }
+
     const data = await response.json();
     return data;
   } catch (error) {

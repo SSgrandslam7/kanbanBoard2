@@ -16,6 +16,7 @@ export const login = async (req, res) => {
         }
         const token = jwt.sign({ id: user.id, username: user.username }, process.env.JWT_SECRET_KEY, { expiresIn: '1h' });
         console.log('Generated token:', token);
+        console.log('JWT_SECRET_KEY (Render):', process.env.JWT_SECRET_KEY);
         if (!token) {
             return res.status(500).json({ message: 'Token generation failed' });
         }
