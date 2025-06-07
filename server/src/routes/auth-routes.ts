@@ -7,6 +7,8 @@ export const login = async (req: Request, res: Response) => {
   const { username, password } = req.body;
 
   try {
+    console.log('JWT_SECRET_KEY in login route:', process.env.JWT_SECRET_KEY);
+
     const user = await User.findOne({ where: { username } });
 
     if (!user) {
@@ -24,13 +26,19 @@ export const login = async (req: Request, res: Response) => {
       { expiresIn: '1h' }
     );
 
+    console.log('Generated token:', token);
+
+    if (!token) {
+      return res.status(500).json({ message: 'Token generation failed' });
+    }
+
     return res.json({ token });
   } catch (err) {
     console.error('Login error:', err);
     return res.status(500).json({ message: 'Server error' });
   }
 };
-console.log('JWT_SECRET_KEY:', process.env.JWT_SECRET_KEY);
+
 const router = Router();
 
 // POST /auth/login - Login a user
