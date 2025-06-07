@@ -10,30 +10,30 @@ export const login = async (req: Request, res: Response) => {
     const user = await User.findOne({ where: { username } });
 
     if (!user) {
-      return res.status(401).json({ message: 'Invalid username or password' });
+      return res.status(401).json({ message: 'Invalid credentials' });
     }
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
-      return res.status(401).json({ message: 'Invalid username or password' });
+      return res.status(401).json({ message: 'Invalid credentials' });
     }
 
     const token = jwt.sign(
       { id: user.id, username: user.username },
-      process.env.JWT_SECRET_KEY || 'defaultsecret',
-      { expiresIn: '2h' }
+      process.env.JWT_SECRET_KEY as string,
+      { expiresIn: '1h' }
     );
 
-    res.json({ token });
+    return res.json({ token });
   } catch (err) {
     console.error('Login error:', err);
-    res.status(500).json({ message: 'Something went wrong' });
+    return res.status(500).json({ message: 'Server error' });
   }
 };
 
 const router = Router();
 
-// POST /auth/login
+// POST /auth/login - Login a user
 router.post('/login', login);
 
 export default router;
