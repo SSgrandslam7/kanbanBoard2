@@ -2,9 +2,7 @@ import { TicketData } from '../interfaces/TicketData';
 import { ApiMessage } from '../interfaces/ApiMessage';
 import Auth from '../utils/auth';
 
-const BASE_URL = import.meta.env.PROD
-  ? 'https://kanbanboard-u0wl.onrender.com'
-  : 'http://localhost:3001';
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 const retrieveTickets = async () => {
   try {

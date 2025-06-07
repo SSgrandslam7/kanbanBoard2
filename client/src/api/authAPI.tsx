@@ -1,8 +1,6 @@
 import { UserLogin } from "../interfaces/UserLogin";
 
-const BASE_URL = import.meta.env.PROD
-  ? 'https://kanbanboard-u0wl.onrender.com'
-  : 'http://localhost:3001';
+const BASE_URL = import.meta.env.VITE_API_URL || ' ';
 
 const login = async (userInfo: UserLogin) => {
   try {
@@ -16,12 +14,6 @@ const login = async (userInfo: UserLogin) => {
 
     if (!response.ok) {
       throw new Error('Login failed');
-    }
-
-    // Check Content-Length before parsing
-    const contentLength = response.headers.get("Content-Length");
-    if (!contentLength || parseInt(contentLength) === 0) {
-      throw new Error('Empty response body');
     }
 
     const data = await response.json();
