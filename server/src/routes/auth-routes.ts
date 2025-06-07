@@ -27,6 +27,7 @@ export const login = async (req: Request, res: Response) => {
     );
 
     console.log('Generated token:', token);
+    console.log('JWT_SECRET_KEY (Render):', process.env.JWT_SECRET_KEY);
 
     if (!token) {
       return res.status(500).json({ message: 'Token generation failed' });
