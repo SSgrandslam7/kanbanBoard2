@@ -30,7 +30,7 @@ To run this project locally:
 1. Clone the repo:
 
    ```bash
-   git clone https://github.com/yourusername/kanbanBoard2.git
+   git clone https://github.com/SSgrandslam7/kanbanBoard2.git
    cd kanbanBoard2
    ```
 
