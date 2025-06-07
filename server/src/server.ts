@@ -5,7 +5,7 @@ import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
-
+import cors from 'cors';
 import routes from './routes/index.js';
 import { sequelize } from './models/index.js';
 
@@ -19,7 +19,10 @@ const forceDatabaseRefresh = false;
 
 // Serve static assets from Vite build
 app.use(express.static(path.resolve(__dirname, '../../client/dist')));
-
+app.use(cors({
+  origin: 'https://kanban-client-pitq.onrender.com',
+  credentials: true,
+}));
 app.use(express.json());
 app.use(routes);
 
