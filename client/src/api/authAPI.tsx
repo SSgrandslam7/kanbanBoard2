@@ -1,8 +1,12 @@
 import { UserLogin } from "../interfaces/UserLogin";
 
+const BASE_URL = import.meta.env.PROD
+  ? 'https://kanbanboard-u0wl.onrender.com'
+  : 'http://localhost:3001';
+
 const login = async (userInfo: UserLogin) => {
   try {
-    const response = await fetch('https://kanbanboard-u0wl.onrender.com/auth/login', {
+    const response = await fetch(`${BASE_URL}/auth/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

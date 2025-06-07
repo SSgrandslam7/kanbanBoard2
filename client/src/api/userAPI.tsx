@@ -1,8 +1,12 @@
 import Auth from '../utils/auth';
 
+const BASE_URL = import.meta.env.PROD
+  ? 'https://kanbanboard-u0wl.onrender.com'
+  : 'http://localhost:3001';
+
 const retrieveUsers = async () => {
   try {
-    const response = await fetch('/api/users', {
+    const response = await fetch(`${BASE_URL}/api/users`, {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${Auth.getToken()}`
